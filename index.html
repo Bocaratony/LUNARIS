@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>13-Month Calendar — Custom</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#1b1f23" />
+</head>
+<body>
+  <header>
+    <h1>Your 13-Month Calendar</h1>
+    <div class="controls">
+      <label>Custom Year: <input id="yearInput" type="number" min="1" value="2025"></label>
+      <button id="prevYear">◀</button>
+      <button id="nextYear">▶</button>
+      <button id="settingsBtn">⚙️ Settings</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="calendarWrap"></section>
+
+    <aside id="sidebar">
+      <h2>Legend & Layers</h2>
+      <ul>
+        <li><span class="dot full"></span> Full Moon</li>
+        <li><span class="dot eclipse"></span> Eclipse (importable)</li>
+        <li><span class="dot ritual"></span> Ritual / Notes</li>
+      </ul>
+
+      <h3>Quick toggles</h3>
+      <label><input id="toggleGregorian" type="checkbox"> Show Gregorian date under each day</label><br>
+      <label><input id="toggleMoonLabels" type="checkbox" checked> Show moon icons</label>
+
+      <h3>Data / Import</h3>
+      <p>Paste eclipse JSON below (array of {date:"YYYY-MM-DD",type:"lunar|solar",notes:"..."})</p>
+      <textarea id="eclipseJSON" placeholder='[{"date":"2026-08-12","type":"solar","notes":"Total solar"}]'></textarea>
+      <button id="importEclipses">Import eclipses</button>
+
+      <h3>Selected day</h3>
+      <div id="dayDetails">Click any day</div>
+    </aside>
+  </main>
+
+  <!-- Settings modal (hidden) -->
+  <div id="settingsModal" class="modal">
+    <div class="modalContent">
+      <h2>Settings</h2>
+      <p><strong>Custom months (order & names)</strong> — each must be 28 days. You can edit names/order here.</p>
+      <textarea id="monthsEdit" rows="3"></textarea>
+
+      <p><strong>Anchor mapping</strong> — link one custom date to a Gregorian date so conversions work.</p>
+      <div class="anchorRow">
+        <label>Custom (YYYY-MMM-DD): <input id="anchorCustom" placeholder="e.g. 1997-Aureus-17"></label>
+        <label>Gregorian (YYYY-MM-DD): <input id="anchorGregorian" placeholder="1997-11-21"></label>
+      </div>
+      <button id="saveSettings">Save settings</button>
+      <button id="closeSettings">Close</button>
+    </div>
+  </div>
+
+  <footer>
+    <small>Made for your 13-month system • PWA ready</small>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js').catch(console.error);
+    }
+  </script>
+</body>
+</html>
