@@ -1,0 +1,58 @@
+:root{
+  --bg:#0f1113;
+  --card:#111416;
+  --text:#e6e6e6;
+  --muted:#99a1a8;
+  --accent:#9fbf6b;
+  --accent2:#7fb4ff;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  background:linear-gradient(180deg,#070809,var(--bg));
+  color:var(--text);
+  min-height:100vh;
+}
+header{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;background:rgba(0,0,0,0.2)}
+h1{margin:0;font-size:1.1rem}
+.controls input, .controls button{margin-left:8px}
+main{display:flex;gap:18px;padding:18px}
+#calendarWrap{
+  flex:1;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:12px;
+}
+.monthCard{
+  background:var(--card);
+  padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);
+}
+.monthHeader{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.day{
+  background:rgba(255,255,255,0.02);
+  padding:8px;border-radius:6px;min-height:58px;position:relative;font-size:0.85rem;
+}
+.day .g{font-size:0.7rem;color:var(--muted);margin-top:6px}
+.day .dots{position:absolute;left:6px;bottom:6px;display:flex;gap:6px}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%}
+.dot.full{background:var(--accent)}
+.dot.eclipse{background:#ffcf6b}
+.dot.ritual{background:#d48cff}
+
+aside#sidebar{
+  width:320px;background:linear-gradient(180deg,#0e1113,#0b0d0f);
+  padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.02);
+  height:calc(100vh - 110px);overflow:auto;
+}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);align-items:center;justify-content:center}
+.modalContent{background:var(--card);padding:16px;border-radius:10px;max-width:720px;width:96%}
+footer{padding:14px;text-align:center;color:var(--muted)}
+
+.day.fullMoon{box-shadow:0 0 0 2px rgba(159,191,107,0.09) inset}
+.day.eclipse{outline:2px dashed rgba(255,207,107,0.08)}
+
+@media (max-width:900px){
+  aside#sidebar{display:none}
+}
